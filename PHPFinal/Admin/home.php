@@ -38,7 +38,7 @@ $qtyOnHand = filter_input(INPUT_POST,'qtyOnHand',FILTER_DEFAULT);
 if($delete==NULL && $edit==NULL){if($order=="true"){ include "displayOrders.php";}}
 if($delete==NULL && $edit==NULL){if($catID != NULL){include "displayProducts.php";}}
 else if($edit == "prod"){include "editproduct.php";}
-else if($delete =="prod"){deleteProduct($productID);header("Location ./home.php");}
+else if($delete =="prod"){deleteProduct($productID);include 'displayCategories';}
 if($add=="ADD")
 {
     $productImage = $_FILES['addImage']['name'];
@@ -46,7 +46,7 @@ if($add=="ADD")
     {
         addProduct($productName,$productImage,$categoryID,$listPrice,$qtyOnHand);
         $tmpName = $_FILES['addImage']['tmp_name'];
-        $dir = "./images/";
+        $dir = "../images/";
         $target_file=$dir .basename($_FILES['addImage']['name']);
         move_uploaded_file($tmpName,$target_file);
     }
@@ -62,7 +62,7 @@ else if($prodEdit == 'edit')
         $productImage = $_FILES['addImage']['name'];
         editProduct($prodID,$productName,$productImage,$categoryID,$listPrice,$qtyOnHand);
         $tmpName = $_FILES['addImage']['tmp_name'];
-        $dir = "./images/";
+        $dir = "../images/";
         $target_file=$dir .basename($_FILES['addImage']['name']);
         move_uploaded_file($tmpName,$target_file);
         $_SESSION['error']="none";
